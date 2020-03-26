@@ -14,6 +14,6 @@ class SHA_2:
         return hashlib.sha256( message ).hexdigest()
 
 
-message = b""
-sha_2 = SHA_2()
-print( sha_2.hash(message) )
+# message = b""
+# sha_2 = SHA_2()
+# print( sha_2.hash(message) )

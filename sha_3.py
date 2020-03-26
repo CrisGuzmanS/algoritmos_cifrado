@@ -14,6 +14,6 @@ class SHA_3:
         return hashlib.sha3_256( message ).hexdigest()
 
 
-message = b"abc"
-sha_3 = SHA_3()
-print( sha_3.hash(message) )
+# message = b""
+# sha_3 = SHA_3()
+# print( sha_3.hash(message) )

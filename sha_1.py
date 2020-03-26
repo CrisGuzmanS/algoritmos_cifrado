@@ -14,6 +14,6 @@ class SHA_1:
         return hashlib.sha1( message ).hexdigest()
 
 
-message = b""
-sha_1 = SHA_1()
-print( sha_1.hash(message) )
+# message = b""
+# sha_1 = SHA_1()
+# print( sha_1.hash(message) )
