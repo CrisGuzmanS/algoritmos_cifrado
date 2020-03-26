@@ -4,7 +4,7 @@
 
 import hashlib
 from Reader import Reader
-import datetime
+from timeit import default_timer as timer
 
 
 class SHA_1:
@@ -14,10 +14,9 @@ class SHA_1:
 
     def hash(self, message):
         message = bytes(message.encode())
-        start_time = datetime.datetime.now()
+        start_time = timer()
         hashed = hashlib.sha1( message )
-        self.executionTime = datetime.datetime.now() - start_time
-        self.executionTime = self.executionTime.microseconds
+        self.executionTime = timer() - start_time
         return hashed.hexdigest().upper()
 
 

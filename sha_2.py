@@ -3,7 +3,7 @@
 # ===============
 
 import hashlib
-import datetime
+from timeit import default_timer as timer
 
 class SHA_2:
 
@@ -12,10 +12,9 @@ class SHA_2:
 
     def hash(self, message):
         message = bytes(message.encode())
-        start_time = datetime.datetime.now()
+        start_time = timer()
         hashed = hashlib.sha256( message )
-        self.executionTime = datetime.datetime.now() - start_time
-        self.executionTime = self.executionTime.microseconds
+        self.executionTime = timer() - start_time
         return hashed.hexdigest().upper()
 
 
