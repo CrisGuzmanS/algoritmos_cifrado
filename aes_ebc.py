@@ -19,8 +19,8 @@ class AES_EBC:
         return message.hex()
 
 
-key = "0000000000000000000000000000000000000000000000000000000000000000"
-message = "014730f80ac625fe84f026c60bfd547d"
+# key = "0000000000000000000000000000000000000000000000000000000000000000"
+# message = "014730f80ac625fe84f026c60bfd547d"
 
-aes_ebc = AES_EBC( key )
-print( aes_ebc.encrypt( message ) )
+# aes_ebc = AES_EBC( key )
+# print( aes_ebc.encrypt( message ) )

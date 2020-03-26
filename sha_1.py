@@ -3,6 +3,9 @@
 # ===============
 
 import hashlib
+from Reader import Reader
+import datetime
+
 
 class SHA_1:
 
@@ -10,10 +13,11 @@ class SHA_1:
         pass
 
     def hash(self, message):
-        message = bytes(message)
-        return hashlib.sha1( message ).hexdigest()
+        message = bytes(message.encode())
+        start_time = datetime.datetime.now()
+        hashed = hashlib.sha1( message )
+        self.executionTime = datetime.datetime.now() - start_time
+        self.executionTime = self.executionTime.microseconds
+        return hashed.hexdigest().upper()
 
 
-# message = b""
-# sha_1 = SHA_1()
-# print( sha_1.hash(message) )

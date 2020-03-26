@@ -3,6 +3,7 @@
 # ===============
 
 import hashlib
+import datetime
 
 class SHA_2:
 
@@ -10,8 +11,12 @@ class SHA_2:
         pass
 
     def hash(self, message):
-        message = bytes(message)
-        return hashlib.sha256( message ).hexdigest()
+        message = bytes(message.encode())
+        start_time = datetime.datetime.now()
+        hashed = hashlib.sha256( message )
+        self.executionTime = datetime.datetime.now() - start_time
+        self.executionTime = self.executionTime.microseconds
+        return hashed.hexdigest().upper()
 
 
 # message = b""

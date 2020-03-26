@@ -19,12 +19,3 @@ class AES_CBC:
         message = bytes.fromhex(message)
         cipher = AES.new(self.key, AES.MODE_CBC, self.iv)
         return (cipher.encrypt(pad(message, self.block_size))).hex()
-
-
-
-data = "014730f80ac625fe84f026c60bfd547d"
-key = "0000000000000000000000000000000000000000000000000000000000000000"
-iv = "00000000000000000000000000000000"
-
-aes_cbc = AES_CBC(key, iv, 16)
-print(aes_cbc.encrypt(data))
