@@ -14,4 +14,4 @@ class Reader:
 
 reader = Reader('input.txt')
 reader.read()
-print( reader.getVectors() )
+# print( reader.getVectors() )

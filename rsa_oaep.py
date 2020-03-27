@@ -1,6 +1,7 @@
 from Crypto.Cipher import PKCS1_OAEP
 from Crypto.PublicKey import RSA
 from Crypto import Random
+from timeit import default_timer as timer
 
 class RSA_OAEP:
 
@@ -14,7 +15,9 @@ class RSA_OAEP:
         random_generator = Random.new().read
         key = RSA.generate(1024, random_generator)
         cipher = PKCS1_OAEP.new(key)
+        start_time = timer()
         ciphertext = cipher.encrypt(message)
+        self.executionTime = timer() - start_time
         return ciphertext.hex().upper()
     
     def decrypt(self):
