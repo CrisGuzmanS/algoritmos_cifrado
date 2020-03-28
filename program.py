@@ -10,6 +10,7 @@ from rsa_oaep import RSA_OAEP
 
 from rsa_pss import RSA_PSS
 from dsa_algorithm import DSA_ALGORITHM
+from ecdsa import ECDSA
 
 from sha_1 import SHA_1
 from sha_2 import SHA_2
@@ -77,7 +78,7 @@ if( operation.isDecryption() ):
 if( operation.isSigning() ):
         rsa_pss = RSA_PSS()
         dsa_algorithm = DSA_ALGORITHM()
-        # ECDSA
+        ecdsa = ECDSA()
         pass
 
 # ===========================
