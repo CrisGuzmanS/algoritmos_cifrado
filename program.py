@@ -7,7 +7,9 @@ from EncryptionWriter import EncryptionWriter
 from aes_cbc import AES_CBC
 from aes_ebc import AES_EBC
 from rsa_oaep import RSA_OAEP
+
 from rsa_pss import RSA_PSS
+from dsa_algorithm import DSA_ALGORITHM
 
 from sha_1 import SHA_1
 from sha_2 import SHA_2
@@ -68,18 +70,22 @@ if( operation.isDecryption() ):
         # RSA_OAEP
         pass
 
+# ====================
+# OPERACIONES DE FIRMA
+# ====================
+
+if( operation.isSigning() ):
+        rsa_pss = RSA_PSS()
+        dsa_algorithm = DSA_ALGORITHM()
+        # ECDSA
+        pass
+
 # ===========================
 # OPERACIONES DE VERIFICACIÓN
 # ===========================
 
 if( operation.isVerifying() ):
         # RSA PSS
-        # DSA
-        # ECDSA
-        pass
-
-if( operation.isSigning() ):
-        rsa_pss = RSA_PSS()
         # DSA
         # ECDSA
         pass

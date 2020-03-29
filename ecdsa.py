@@ -1,4 +1,7 @@
 class ECDSA:
 
-    def __init__(self):
+    def sign(self, message):
+        pass
+
+    def verify(self, message):
         pass
