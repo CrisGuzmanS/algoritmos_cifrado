@@ -3,6 +3,7 @@ from Reader import Reader
 from Operation import Operation
 from HashingWriter import HashingWriter
 from EncryptionWriter import EncryptionWriter
+from SignatureWriter import SignatureWriter
 
 from aes_cbc import AES_CBC
 from aes_ebc import AES_EBC
@@ -66,27 +67,36 @@ if( operation.isEncryption() ):
 # ========================
 
 if( operation.isDecryption() ):
-        # AES_EBC
-        # AES_CBC
-        # RSA_OAEP
-        pass
+	# AES_EBC
+	# AES_CBC
+	# RSA_OAEP
+	pass
 
 # ====================
 # OPERACIONES DE FIRMA
 # ====================
 
 if( operation.isSigning() ):
-        rsa_pss = RSA_PSS()
-        dsa_algorithm = DSA_ALGORITHM()
-        ecdsa = ECDSA()
-        pass
+
+	signatureWriter = SignatureWriter()
+
+	rsa_pss = RSA_PSS()
+	dsa_algorithm = DSA_ALGORITHM()
+	ecdsa = ECDSA()
+
+	for vector in reader.getVectors():
+		rsa_pss.sign( vector )
+		dsa_algorithm.sign( vector )
+		ecdsa.sign( vector )
+		signatureWriter.write( [ vector, rsa_pss.executionTime, dsa_algorithm.executionTime, ecdsa.executionTime ] )
+
 
 # ===========================
 # OPERACIONES DE VERIFICACIÓN
 # ===========================
 
 if( operation.isVerifying() ):
-        # RSA PSS
-        # DSA
-        # ECDSA
-        pass
+	# RSA PSS
+	# DSA
+	# ECDSA
+	pass
