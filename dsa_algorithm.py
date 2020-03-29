@@ -21,4 +21,3 @@ class DSA_ALGORITHM:
 
 message = "Hello"
 dsa = DSA_ALGORITHM()
-print( dsa.sign(message) )

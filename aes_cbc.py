@@ -3,24 +3,24 @@
 # ==================================
 
 from Crypto.Cipher import AES
+from Crypto import Random
 from Crypto.Random import get_random_bytes
 from Crypto.Util.Padding import pad, unpad
+import hashlib
 from timeit import default_timer as timer
 
 
 class AES_CBC:
 
     def __init__(self):
-        self.key = bytes.fromhex("0000000000000000000000000000000000000000000000000000000000000000")
-        self.iv = bytes.fromhex("00000000000000000000000000000000")
-        self.block_size = 16
-        AES.block_size = 16
+        self.key = hashlib.sha256("0000000000000000000000000000000000000000000000000000000000000000".encode()).digest()
+        self.iv = Random.new().read(AES.block_size)
 
     def encrypt(self, message):
         message = bytes.fromhex(message)
         cipher = AES.new(self.key, AES.MODE_CBC, self.iv)
         start_time = timer()
-        ciphered = cipher.encrypt(pad(message, self.block_size))
+        ciphered = cipher.encrypt(pad(message, AES.block_size))
         self.executionTime = timer() - start_time
         return ciphered.hex().upper()
 

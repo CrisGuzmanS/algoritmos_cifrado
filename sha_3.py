@@ -2,7 +2,7 @@
 # HASH OPERATIONS
 # ===============
 
-import hashlib
+from Crypto.Hash import SHA3_512
 from timeit import default_timer as timer
 
 class SHA_3:
@@ -12,10 +12,11 @@ class SHA_3:
 
     def hash(self, message):
         message = bytes(message.encode())
+        h_obj = SHA3_512.new()
         start_time = timer()
-        hashed = hashlib.sha3_256( message )
+        h_obj.update(message)
         self.executionTime = timer() - start_time
-        return hashed.hexdigest().upper()
+        return h_obj.hexdigest().upper()
 
 
 # message = b""

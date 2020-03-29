@@ -2,7 +2,7 @@
 # HASH OPERATIONS
 # ===============
 
-import hashlib
+from Crypto.Hash import SHA1
 from Reader import Reader
 from timeit import default_timer as timer
 
@@ -14,9 +14,10 @@ class SHA_1:
 
     def hash(self, message):
         message = bytes(message.encode())
+        h = SHA1.new()
         start_time = timer()
-        hashed = hashlib.sha1( message )
+        h.update( message )
         self.executionTime = timer() - start_time
-        return hashed.hexdigest().upper()
+        return h.hexdigest().upper()
 
 

@@ -32,6 +32,8 @@ reader.read()
 
 if( operation.isHashing() ):
 	
+	print("hashing")
+
 	hashingWriter = HashingWriter()
 
 	sha_1 = SHA_1()
@@ -39,10 +41,11 @@ if( operation.isHashing() ):
 	sha_3 = SHA_3()
 
 	for vector in reader.getVectors():
-		sha_1.hash( vector )
-		sha_2.hash( vector )
-		sha_3.hash( vector )
-		hashingWriter.write( [vector, sha_1.executionTime, sha_2.executionTime, sha_3.executionTime] )
+		for i in range(0,3):
+			sha_1.hash( vector )
+			sha_2.hash( vector )
+			sha_3.hash( vector )
+			hashingWriter.write( [vector, sha_1.executionTime, sha_2.executionTime, sha_3.executionTime] )
 
 # ======================
 # OPERACIONES DE CIFRADO
@@ -57,10 +60,11 @@ if( operation.isEncryption() ):
 	rsa_oaep = RSA_OAEP()
 
 	for vector in reader.getVectors():
-		aes_ebc.encrypt( vector )
-		aes_cbc.encrypt( vector )
-		rsa_oaep.encrypt( vector )
-		encryptionWriter.write( [ vector, aes_ebc.executionTime, aes_cbc.executionTime, rsa_oaep.executionTime ] )
+		for i in range(3):
+			aes_ebc.encrypt( vector )
+			aes_cbc.encrypt( vector )
+			rsa_oaep.encrypt( vector )
+			encryptionWriter.write( [ vector, aes_ebc.executionTime, aes_cbc.executionTime, rsa_oaep.executionTime ] )
 
 # ========================
 # OPERACIONES DE DECIFRADO
@@ -85,10 +89,11 @@ if( operation.isSigning() ):
 	ecdsa = ECDSA()
 
 	for vector in reader.getVectors():
-		rsa_pss.sign( vector )
-		dsa_algorithm.sign( vector )
-		ecdsa.sign( vector )
-		signatureWriter.write( [ vector, rsa_pss.executionTime, dsa_algorithm.executionTime, ecdsa.executionTime ] )
+		for i in range(3):
+			rsa_pss.sign( vector*10 )
+			dsa_algorithm.sign( vector*10 )
+			ecdsa.sign( vector*10 )
+			signatureWriter.write( [ vector, rsa_pss.executionTime, dsa_algorithm.executionTime, ecdsa.executionTime ] )
 
 
 # ===========================

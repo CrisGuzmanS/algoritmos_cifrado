@@ -28,4 +28,3 @@ class RSA_PSS:
 message = "04df2328374635f9f023"
 
 rsa_pss = RSA_PSS()
-print( rsa_pss.sign(message) )
