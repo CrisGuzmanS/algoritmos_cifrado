@@ -24,14 +24,16 @@ class AES_CBC:
         self.executionTime = timer() - start_time
         return ciphered.hex().upper()
     
-    def decrypt(self, message):
+     def decrypt(self, message):
         message = bytes.fromhex(message)
+        cipher = AES.new(self.key, AES.MODE_CBC, self.iv)
+        ciphered = cipher.encrypt(pad(message, AES.block_size))
+
         dec = AES.new(self.key, AES.MODE_CBC, self.iv)
         start_time = timer()
-        decrypted_msg = dec.decrypt(message)
+        decrypted_msg = dec.decrypt(ciphered)
         self.executionTime = timer() - start_time
         return decrypted_msg.hex()
-
 # message = "014730f80ac625fe84f026c60bfd547d"
 
 # aes_cbc = AES_CBC()
