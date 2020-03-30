@@ -37,4 +37,3 @@ message = 'I give my permission to order #4355'
 
 ecdsa = ECDSA()
 ecdsa.sign(message)
-ecdsa.verify(message)
