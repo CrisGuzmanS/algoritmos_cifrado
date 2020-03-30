@@ -5,6 +5,7 @@ from HashingWriter import HashingWriter
 from EncryptionWriter import EncryptionWriter
 from SignatureWriter import SignatureWriter
 from DecryptionWriter import DecryptionWriter
+from VerifyWriter import VerifyWriter
 
 
 from aes_cbc import AES_CBC
@@ -111,7 +112,16 @@ if( operation.isSigning() ):
 # ===========================
 
 if( operation.isVerifying() ):
-	# RSA PSS
-	# DSA
-	# ECDSA
-	pass
+	
+	verifyWriter = VerifyWriter()
+	
+	rsa_pss = RSA_PSS()
+	ecdsa = ECDSA()
+	dsa = DSA_ALGORITHM()
+	
+	for vector in reader.getVectors():
+		for i in range(3):
+			rsa_pss.verify(vector)
+			ecdsa.verify(vector)
+			dsa.verify(vector)
+			verifyWriter.write([vector,rsa_pss.executionTime, ecdsa.executionTime,dsa.executionTime])
