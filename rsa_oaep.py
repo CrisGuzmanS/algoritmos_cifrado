@@ -28,13 +28,17 @@ class RSA_OAEP:
         msg = cipher.decrypt(ciphertext)
         self.executionTime = timer() - start_time
         return msg.hex().upper()
+     def decrypt(self,message):
+        message= bytes.fromhex(message)
+        random_generator = Random.new().read
+        key = RSA.generate(1024, random_generator)
+        cipher = PKCS1_OAEP.new(key)
         
-        
-        
+        start_time = timer()
+       
+        decrypted= cipher.decrypt(message)
+        self.executionTime = timer() - start_time
+        return decrypted.hex()
         
 
 
-message = '19875AB493FD83475D'
-rsa_oaep = RSA_OAEP()
-msg_encrypted = rsa_oaep.encrypt( message, key)
-rsa_oaep.decrypt(msg_encrypted)
