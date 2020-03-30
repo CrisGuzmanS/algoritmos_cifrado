@@ -4,14 +4,13 @@ from Crypto import Random
 from timeit import default_timer as timer
 
 class RSA_OAEP:
-    key = RSA.generate(1024, random_generator)
-    random_generator = Random.new().read
-
+    
     def __init__(self):
         pass
 
     def encrypt(self, message, key):
-
+        random_generator = Random.new().read
+        key = RSA.generate(1024, random_generator)
         message = bytes.fromhex(message)
 
 
@@ -30,11 +29,3 @@ class RSA_OAEP:
         return msg.hex().upper()
         
         
-        
-        
-
-
-message = '19875AB493FD83475D'
-rsa_oaep = RSA_OAEP()
-msg_encrypted = rsa_oaep.encrypt( message, key)
-rsa_oaep.decrypt(msg_encrypted)
