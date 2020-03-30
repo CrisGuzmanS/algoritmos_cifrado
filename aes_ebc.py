@@ -23,6 +23,9 @@ class AES_EBC:
 
     def decrypt(self, message):
         message = bytes.fromhex(message)
+        cipher = AES.new(self.key, AES.MODE_ECB)
+        message = cipher.encrypt( pad(message, 16) )
+
         dec = AES.new(self.key, AES.MODE_ECB)
         start_time = timer()
         d=dec.decrypt(message)
