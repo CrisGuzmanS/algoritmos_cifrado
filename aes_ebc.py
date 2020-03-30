@@ -21,6 +21,13 @@ class AES_EBC:
         self.executionTime = timer() - start_time
         return message.hex()
 
+    def decrypt(self, message):
+        message = bytes.fromhex(message)
+        dec = AES.new(self.key, AES.MODE_ECB)
+        start_time = timer()
+        d=dec.decrypt(message)
+        self.executionTime = timer() - start_time
+        return d.hex()
 
 # key = "0000000000000000000000000000000000000000000000000000000000000000"
 # message = "014730f80ac625fe84f026c60bfd547d"
