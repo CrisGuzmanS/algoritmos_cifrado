@@ -4,6 +4,8 @@ from Operation import Operation
 from HashingWriter import HashingWriter
 from EncryptionWriter import EncryptionWriter
 from SignatureWriter import SignatureWriter
+from DecryptionWriter import DecryptionWriter
+
 
 from aes_cbc import AES_CBC
 from aes_ebc import AES_EBC
@@ -17,8 +19,7 @@ from sha_1 import SHA_1
 from sha_2 import SHA_2
 from sha_3 import SHA_3
 
-from aes_cbc import AES_CBC
-from aes_ebc import AES_EBC
+
 
 operation = Operation()
 operation.read()
@@ -26,6 +27,8 @@ operation.read()
 reader = Reader('input.txt')
 reader.read()
 
+reader2 = Reader('input2.txt')
+reader2.read()
 # ======================
 # OPERACIONES DE HASHING
 # ======================
@@ -71,11 +74,20 @@ if( operation.isEncryption() ):
 # ========================
 
 if( operation.isDecryption() ):
-	# AES_EBC
-	# AES_CBC
-	# RSA_OAEP
-	pass
+    decryptionWriter = DecryptionWriter()
+    
+    aes_ebc = AES_EBC()
+    aes_cbc = AES_CBC()
+    rsa_oaep = RSA_OAEP()
 
+
+    for vector in reader2.getVectors():
+        for i in range(3):
+            
+            aes_cbc.decrypt( vector )
+            aes_ebc.decrypt(vector)
+          #  rsa_oaep.decrypt(vector)
+            decryptionWriter.write( [ vector, aes_ebc.executionTime, aes_cbc.executionTime, ] )
 # ====================
 # OPERACIONES DE FIRMA
 # ====================
