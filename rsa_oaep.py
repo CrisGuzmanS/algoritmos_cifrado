@@ -21,16 +21,18 @@ class RSA_OAEP:
         self.executionTime = timer() - start_time
         return ciphertext.hex().upper()
 
-    
-    def decrypt(self, message):
-        message = binascii.unhexlify( self.encrypt( (message)) )
-        cipher = PKCS1_OAEP.new(self.key)
+     def decrypt(self,message):
+        message= bytes.fromhex(message)
+        random_generator = Random.new().read
+        key = RSA.generate(1024, random_generator)
+        cipher = PKCS1_OAEP.new(key)
+        ciphertext = cipher.encrypt(message)
         start_time = timer()
-        msg = cipher.decrypt(message)
+       
+        decrypted= cipher.decrypt(ciphertext)
         self.executionTime = timer() - start_time
-        return msg.hex().upper()
+        return decrypted.hex()
         
-rsa_oaep = RSA_OAEP()
-print( rsa_oaep.encrypt('293847fa') )
-print( rsa_oaep.decrypt('293847fa') )
+        
+
 # print( rsa_oaep.publicKey )
