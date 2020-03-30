@@ -27,8 +27,6 @@ operation.read()
 reader = Reader('input.txt')
 reader.read()
 
-reader2 = Reader('input2.txt')
-reader2.read()
 # ======================
 # OPERACIONES DE HASHING
 # ======================
@@ -81,13 +79,13 @@ if( operation.isDecryption() ):
     rsa_oaep = RSA_OAEP()
 
 
-    for vector in reader2.getVectors():
+    for vector in reader.getVectors():
         for i in range(3):
             
             aes_cbc.decrypt( vector )
             aes_ebc.decrypt(vector)
-          #  rsa_oaep.decrypt(vector)
-            decryptionWriter.write( [ vector, aes_ebc.executionTime, aes_cbc.executionTime, ] )
+            rsa_oaep.decrypt(vector)
+            decryptionWriter.write( [ vector, aes_ebc.executionTime, aes_cbc.executionTime, rsa_oaep.executionTime ] )
 # ====================
 # OPERACIONES DE FIRMA
 # ====================
